@@ -1,0 +1,37 @@
+[
+    {
+        "name": "zkSync",
+        "value": "zkSync(ZKSYNC)",
+        "rule":"无锁"
+    },
+    {
+        "name": "Celestia",
+        "value": "Celestia(TIA)",
+        "rule":""
+    },
+    {
+        "name": "Story",
+        "value": "Story(STORY)",
+        "rule":"无锁"
+    },
+    {
+        "name": "Blast",
+        "value": "Blast(BLAST)",
+        "rule":"无锁"
+    },
+    {
+        "name": "EigenLayer",
+        "value": "EigenLayer(EIGEN)",
+        "rule":"锁定 1 个月后，6 个月线性释放"
+    },
+    {
+        "name": "Sei",
+        "value": "Sei(SEI)",
+        "rule":"锁定 1 个月后，2 个月释放完毕"
+    },
+    {
+        "name": "Sui",
+        "value": "Sui(SUI)",
+        "rule":"12个月线性释放"
+    }
+]

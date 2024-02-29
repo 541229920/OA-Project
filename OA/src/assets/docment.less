@@ -1,0 +1,55 @@
+@bgColor:#2d2d2d;
+
+header {
+  background:@bgColor;
+  position: sticky;
+  top: 0;
+  z-index: 9;
+  border-bottom: 1px solid hsla(0, 0%, 0%, 0.3);
+}
+
+aside {
+  background: @bgColor;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+
+  .tag {
+    height: 40px;
+    position: absolute;
+    bottom:0;
+    left: 0;
+    right: 0;
+    background: #0000001f;
+    cursor: pointer;
+    transition: 0.4s;
+    z-index: -1;
+    border-radius: 50%;
+
+    &:hover {
+      background: #0000006b;
+    }
+  }
+}
+
+main {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 15px;
+  overflow: auto;
+  background: #f7f7f7;
+}
+
+header,
+aside,
+main {
+  box-sizing: border-box;
+  transition: 0.4s;
+}
+header,
+aside{
+  *{
+    color: #f7f7f7;
+  }
+}

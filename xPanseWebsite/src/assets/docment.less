@@ -1,0 +1,34 @@
+@bg: black;
+
+.headerContent,.outlayer{
+    transition: 0.4s;
+}
+
+.headerContent {
+    color: if((@bg =black)white, black);
+    font-family: 'GOTHIC';
+}
+
+.outlayer {
+    height: 100%;
+    background: @bg;
+    padding: 20px;
+}
+
+.mediumlayer {
+    background: if((@bg =black) rgb(160, 160, 160), rgb(255, 66, 66))
+}
+
+.interval {
+    margin: 20px 0;
+}
+
+.distance {
+    padding: 0 20px;
+}
+
+.frameContent{
+    max-width: 1200px;
+    margin: 0 auto;
+    color: if((@bg =black)white, black);
+}

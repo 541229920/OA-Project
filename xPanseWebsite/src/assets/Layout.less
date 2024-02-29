@@ -1,0 +1,46 @@
+
+header {
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+
+    nav {
+        flex-grow: 12;
+        display: flex;
+        justify-content: center;
+
+        .navMenu {
+            background: white;
+            border-radius: 100px;
+            padding: 10px 20px;
+            transition: 0.4s;
+
+            a {
+                padding: 10px 10px;
+                margin: 0 10px;
+                transition: 0.4s;
+                color: #000;
+                font-weight: 800;
+            }
+
+            &:hover {
+                background: #000;
+
+                a {
+                    color: rgb(255, 255, 255);
+
+                    &:hover {
+                        border-radius: 100px;
+                        background: #ffffff;
+                        color: #000;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+main{
+    color:attr(style background);
+}
