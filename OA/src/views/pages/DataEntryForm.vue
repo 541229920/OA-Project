@@ -2,15 +2,17 @@
 	<div class="EntryForm content">
 		<div class="formData">
 			<form @submit.prevent="handleSubmit">
-				<p><span>微信</span><input v-model="formData.wechat" type="text"></p>
-				<p><span>手机号</span><input v-model="formData.phone" type="number" maxlength="11"></p>
-				<p><span>价格</span><input v-model="formData.price" type="text"></p>
-				<p><span>额度</span><input v-model="formData.quota" type="number"></p>
-				<p><span>哈希值</span><input v-model="formData.hash" type="text" maxlength="64"></p>
+				<p><span>微信</span><input v-model="FormData.wechat" type="text"></p>
+				<p><span>手机号</span><input v-model="FormData.photo" type="number" maxlength="11"></p>
+				<p><span>价格</span><input v-model="FormData.price" type="text"></p>
+				<p><span>额度</span><input v-model="FormData.quota" type="number"></p>
+				<p><span>哈希值</span><input v-model="FormData.hash" type="text" maxlength="64"></p>
 				<p><span>项目</span>
-					<select v-model="formData.project">
+
+					<select v-model="FormData.project">
 						<option v-for="(itme, index) in ProduckData" :value="itme.value">{{ itme.name }}</option>
 					</select>
+
 				</p>
 				<p>
 					<span></span><button class="view">浏览</button>
@@ -32,12 +34,12 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td>{{ ViewData.wechat }}</td>
-							<td>{{ ViewData.phone }}</td>
-							<td>{{ ViewData.project }}</td>
-							<td>{{ ViewData.price }} USDT</td>
-							<td>{{ ViewData.quota }} USDT</td>
-							<td>{{ ViewData.hash }}</td>
+							<td>{{ ViewData?.wechat }}</td>
+							<td>{{ ViewData?.photo }}</td>
+							<td>{{ ViewData?.project }}</td>
+							<td>{{ ViewData?.price }} USDT</td>
+							<td>{{ ViewData?.quota }} USDT</td>
+							<td>{{ ViewData?.hash }}</td>
 						</tr>
 					</tbody>
 				</table>
@@ -48,7 +50,7 @@
 		</div>
 	</div>
 
-	<message v-if="showMsg" :msg-send='sendMsg' />
+	<message v-if="componentInfoObj.showMsg" :msg-send='componentInfoObj.sendMsg' />
 </template>
 
 <script lang="ts" setup>
@@ -57,43 +59,58 @@ import ProduckData from '@/unilt/produck.json'
 import message from '@/components/comp_message.vue'
 import { PostAxios } from '@/unilt/PostAxiosUntli';
 
-let postAxiosEvent = new PostAxios()
-let sendMsg = ref<String>('');
-let showMsg = ref(false)
-let ViewData = ref(Object)
-let formData = ref(Object)
+interface FormData {
+	wechat: String | null,
+	photo: String | null,
+	price: Number | null,
+	quota: Number | null,
+	hash: String | null,
+	project: String | null
+}
 
-let handleSubmit = (event: { preventDefault: () => void; }) => {
+interface ComponentInfoObj {
+	sendMsg: string,
+	showMsg: boolean
+}
+
+const postAxios = new PostAxios()
+const ViewData = ref<FormData>()
+const FormData = ref<FormData>({
+	wechat: null,
+	photo: null,
+	price: null,
+	quota: null,
+	hash: null,
+	project: null
+})
+const componentInfoObj = ref<ComponentInfoObj>({
+	sendMsg: '',
+	showMsg: false
+})
+
+const handleSubmit = (event: { preventDefault: () => void; }) => {
 	event.preventDefault()
-	console.log(formData.value)
-	if (stateRetu(formData.value)) {
-		ViewData.value = formData.value
-	}
+	ViewData.value = { ...FormData.value }
 }
 
-let SubmitForm = () => {
-	if (stateRetu(formData.value)) {
-		postAxiosEvent.PostUser(ViewData.value)
-		shoWEvent()
-	}
-}
-
-let stateRetu = (obj: any) => {
-	for (let key in obj) {
-		if (!obj[key]) {
-			return false
+const SubmitForm = async () => {
+	if (postAxios.validStateRetu(ViewData.value)) {
+		postAxios.PostUser(ViewData.value)
+		if(postAxios.PostUser(ViewData.value)){
+			showMsgEvent('添加完成')
+		}else{
+			showMsgEvent('添加失败')
 		}
 	}
-	return true
 }
-
-let shoWEvent = () => {
-	sendMsg.value = '完成';
-	showMsg.value = true;
+const showMsgEvent = (msg:string) => {
+	componentInfoObj.value.showMsg = true
+	componentInfoObj.value.sendMsg = msg
 	setTimeout(() => {
-		showMsg.value = false;
+		componentInfoObj.value.showMsg = false
 	}, 1000)
 }
+
 </script>
 
 <style lang="less" scoped>

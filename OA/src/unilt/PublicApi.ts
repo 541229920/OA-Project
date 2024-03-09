@@ -1,5 +1,5 @@
 const Api = {
-    GroupApi: "http://localhost:8080/api/xuser"
+    GroupApi: "http://localhost:8080"
 }
 
 export { Api } 
